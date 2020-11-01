@@ -1,0 +1,40 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block page %}
+	<h1>Все дома:</h1>
+	<div class="row">
+		<h1>{{ item.h1 }}</h1>
+		<div class="col">
+	  		<div class="row">
+				{% for product in products %}
+					{% include 'store/layouts/product_item.html' with product=product %}
+					{% if forloop.counter|divisibleby:"2" %}
+						</div>
+						<div class="row">
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>	
+	</div>
+	<br>
+	<div class="row justify-content-md-center">
+		<div class="pagination">
+		    <span class="step-links">
+		        {% if products.has_previous %}
+		            <a href="?page=1">&laquo; Первая</a>
+		            <a href="?page={{ products.previous_page_number }}">Предыдущая</a>
+		        {% endif %}
+
+		        <span class="current">
+		            Страница {{ products.number }} из {{ products.paginator.num_pages }}.
+		        </span>
+
+		        {% if products.has_next %}
+		            <a href="?page={{ products.next_page_number }}">Следующая</a>
+		            <a href="?page={{ products.paginator.num_pages }}">Последняя &raquo;</a>
+		        {% endif %}
+		    </span>
+		</div>
+	</div>
+{% endblock %}

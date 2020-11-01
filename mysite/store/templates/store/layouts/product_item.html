@@ -1,0 +1,26 @@
+<div class="col-12 col-md-6 col-lg-6">
+    <div class="card">
+        {% with product.images|first as image %}
+          {% if image.image %}
+            <img class="card-img-top" src="../media/{{ image.image }}" width="200" height='300' alt="Card image cap">
+          {% else %}
+            <img class="card-img-top" src="http://dummyimage.com/150x60/99cccc/ffffff.gif&text={{ product.name }}" width="200" height='300' alt="Card image cap">
+          {% endif %}
+        {% endwith %}
+        <div class="card-body">
+            <div class="row justify-content-md-center">
+                <a href="/products/{{ product.slug }}" title="View Product">{{ product.name }}</a>
+            </div>
+            <div class="row justify-content-md-center">
+                {% if product.sale_price %}
+                    <p><s>{{ product.price }} Руб.</s> {{ product.sale_price }} Руб. <span style="color:red;">({{ product.sale }}%)</span></p>
+                {% else %}
+                    <p>{{ product.price }} Руб.</p>
+                {% endif %} 
+            </div>
+            <div class="row">
+                <a href="/order/{{ product.slug }}" class="btn btn btn-outline-dark btn-block">Купить</a>
+            </div>
+        </div>
+    </div>
+</div>

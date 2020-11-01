@@ -1,0 +1,1 @@
+/home/temes/tgbot/env/lib/python3.6/site-packages/admin_reorder/static/js/admin-reorder.js
