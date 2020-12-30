@@ -1,6 +1,6 @@
 <div class="col-12 col-md-6 col-lg-6">
     <div class="card">
-        {% with product.images|first as image %}
+        {% with product.images.first as image %}
           {% if image.image %}
             <img class="card-img-top" src="../media/{{ image.image }}" width="200" height='300' alt="Card image cap">
           {% else %}

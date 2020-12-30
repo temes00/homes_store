@@ -2,59 +2,58 @@
 {% load static %}
 
 {% block page %}
-	<h1>Оформление заказа:</h1>
-	<div class="row">
-		<div class="col-12 col-md-8">
-			<form id="user_info">{% csrf_token %}
-				<div class="form-group">
-					<label for="firstname">Имя</label>
-					<input type="text" class="form-control" required id="firstname" name="firstname" placeholder="Василий">
-				</div>
-				<div class="form-group">
-					<label for="lastname">Фамилия</label>
-					<input type="text" class="form-control" required id="lastname" name="lastname" placeholder="Петров">
-				</div>
-				<div class="form-group">
-					<label for="email">Email</label>
-					<input type="email" class="form-control" required id="email" name="email" aria-describedby="emailHelp" placeholder="vasiliy@test.com">
-				</div>
-				<div class="form-group">
-					<label for="phoneNumber">Номер телефона</label>
-					<input type="text" class="form-control" required id="phoneNumber" name="phoneNumber" placeholder="+7 (***) ***-**-**" pattern="[\+][7][\s]{0,1}[\(]{0,1}\d{3}[\)]{0,1}[\s]{0,1}\d{3}[\-]{0,1}\d{2}[\-]{0,1}\d{2}">
-				</div>
-				<div class="form-group">
-					<label for="comment">Комментарий</label>
-					<textarea class="form-control" required id="comment" name="comment" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<button type="submit" id="submit_btn" class="btn btn-outline-dark btn-block">Оформить заказ</button>
-				</div>
-				<input type="text" hidden id="product_slug" name="product_slug" value="{{ item.slug }}">
-			</form>
-		</div>
-		<div class="col-12 col-md-4">
-			<div>
-				{% with item.images|first as image %}
-		          {% if image.image %}
-		            <img class="card-img-top" src="../media/{{ image.image }}" width="200" alt="Card image cap">
-		          {% else %}
-		            <img class="card-img-top" src="http://dummyimage.com/150x60/99cccc/ffffff.gif&text={{ product.name }}" width="200" height='300' alt="Card image cap">
-		          {% endif %}
-		        {% endwith %}
-	        </div>
-			<br>
-			<div class="home-info">
-				{% if item.sale_price %}
-					<p>Старая цена: {{ item.price }} Руб.</p>
-					<p>Скидка: {{ item.sale }}%</p>
-					<p>Цена с учётом скидки: {{ item.sale_price }} Руб.</p>
-				{% else %}
-					<p>Цена: {{ item.price }} Руб.</p>
-				{% endif %}
-				<strong> Расположение: </strong>
-				<p>Город: {{ item.city }}</p>
-				<p>Адрес: {{ item.addres }} </p>
-			</div>
-		</div>
-	</div>
+    <h1>Оформление заказа:</h1>
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <form id="user_info">{% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Имя</label>
+                    <input type="text" class="form-control" required id="name" name="name" placeholder="Василий">
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Фамилия</label>
+                    <input type="text" class="form-control" required id="lastname" name="lastname" placeholder="Петров">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" required id="email" name="email" aria-describedby="emailHelp" placeholder="vasiliy@test.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Номер телефона</label>
+                    <input type="text" class="form-control" required id="phone" name="phone" placeholder="+7 (***) ***-**-**" pattern="[+][7][\s]{0,1}[\(]{0,1}\d{3}[\)]{0,1}[\s]{0,1}\d{3}[\-]{0,1}\d{2}[\-]{0,1}\d{2}">
+                </div>
+                <div class="form-group">
+                    <label for="comment">Комментарий</label>
+                    <textarea class="form-control" required id="comment" name="comment" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="submit_btn" class="btn btn-outline-dark btn-block">Оформить заказ</button>
+                </div>
+                <input type="text" hidden id="product_slug" name="product_slug" value="{{ item.slug }}">
+            </form>
+        </div>
+        <div class="col-12 col-md-4">
+            <div>
+                {% with item.images.first as image %}
+                  {% if image.image %}
+                    <img class="card-img-top" src="../media/{{ image.image }}" width="200" alt="Card image cap">
+                  {% else %}
+                    <img class="card-img-top" src="http://dummyimage.com/150x60/99cccc/ffffff.gif&text={{ product.name }}" width="200" height='300' alt="Card image cap">
+                  {% endif %}
+                {% endwith %}
+            </div>
+            <div class="home-info">
+                {% if item.sale_price %}
+                    <p>Старая цена: {{ item.price }} Руб.</p>
+                    <p>Скидка: {{ item.sale }}%</p>
+                    <p>Цена с учётом скидки: {{ item.sale_price }} Руб.</p>
+                {% else %}
+                    <p>Цена: {{ item.price }} Руб.</p>
+                {% endif %}
+                <strong> Расположение: </strong>
+                <p>Город: {{ item.city }}</p>
+                <p>Адрес: {{ item.addres }} </p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
